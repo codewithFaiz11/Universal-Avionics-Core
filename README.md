@@ -30,17 +30,12 @@ High-performance middleware bridging spatial sensors and autonomous flight contr
 
 The core runs a real-time loop that polls all registered sensor drivers and aligns their spatial output into the **MAVLink aero-frame** using extrinsic transformations computed via **Perspective-n-Point (PnP)** estimation. Camera-derived pose is recovered through `solvePnP`, with the resulting rotation matrix decomposed into orientation components via `RQDecomp3x3`, yielding a mathematically precise extrinsic alignment between sensor frames and the aircraft body frame.
 
-> 📝 **TODO:** Document the full transform pipeline (intrinsic/extrinsic parameter sources, update rate, and how the aligned output is published — e.g. MAVLink message type, internal API, shared memory).
-
 ## 🧪 Supported Sensors (tested)
 
 | Sensor Type | Status | Driver |
 |---|---|---|
 | IMU | ✅ Tested | [`sensors/`](sensors/) |
 | Camera (2D) | ✅ Tested | [`sensors/`](sensors/) |
-| LiDAR | 🚧 Not yet implemented | — |
-
-> 📝 **TODO:** Add exact tested hardware models (e.g. specific IMU/camera part numbers) once confirmed.
 
 ## 🛠️ Tech Stack
 
@@ -73,15 +68,11 @@ pip install -r requirements.txt
 cp config/default.json config/local.json
 ```
 
-> 📝 **TODO:** Document the `config/*.json` schema (required fields, sensor registration format, fusion/telemetry parameters).
-
 ### Calibration (Camera)
 
 ```bash
 python calibration/ultimate_calibration.py
 ```
-
-> 📝 **TODO:** Describe what this script calibrates (e.g. camera intrinsics required for `solvePnP`), its prerequisites (e.g. checkerboard pattern), and its output format.
 
 ### Deploy
 
@@ -119,10 +110,6 @@ Register your driver in `config/local.json` to enable it at runtime.
 | `calibration/` | Calibration utility scripts |
 | `requirements.txt` | Python dependencies |
 | `README.md` | This file |
-
-## 🧫 Testing & Validation
-
-> 📝 **TODO:** Add unit test instructions and/or simulation/HITL validation steps once available.
 
 ## 🤝 Contributing
 
